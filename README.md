@@ -3,7 +3,7 @@ The repository contains various functions for the Forced Harmonic Oscillator Fre
 
 ## Functions descriptions
 - `P_VT_FHO_FR_MA_ij.m` returns P_VT for molecule-atom collision, depending on *M1*, *Coll*, *i<sub>1</sub>*, *f<sub>1</sub>*, *E*, $\varepsilon_1$, y, $\vartheta_1$, $\phi_1$.  
-- `P_VT_FHO_FR_avg_angles.m` returns P_VT molecule-atom collision, depending on *M1*, *Coll*, *i<sub>1</sub>*, *f<sub>1</sub>* and *E*. This fuction averages `P_VT_FHO_FR_MA_ij.m` over $\varepsilon_1$, y, $\vartheta_1$ and $\phi_1$ using numeric multiple intergation `integralN`. NOTE: before using be sure you downloaded [integralN](https://www.mathworks.com/matlabcentral/fileexchange/47919-integraln-m).
+- `P_VT_FHO_FR_avg_angles.m` returns P_VT molecule-atom collision, depending on *M1*, *Coll*, *i<sub>1</sub>*, *f<sub>1</sub>*, *E* and optional *method*. This fuction averages `P_VT_FHO_FR_MA_ij.m` over $\varepsilon_1$, y, $\vartheta_1$ and $\phi_1$ using numeric multiple intergation `integralN` (for *method*='q' or by default) or using `trapz` integration (for *method*='t') (NOTE: before using be sure you downloaded [integralN](https://www.mathworks.com/matlabcentral/fileexchange/47919-integraln-m).
 - `particles_data_ini.m` initializes particles and collisions variables in the format prepared for present functions.  
 - `par_data.mat` containes some particles and collisions variables.  
 - `levels_e_ex.m` calculates vibrational energies of states.  
