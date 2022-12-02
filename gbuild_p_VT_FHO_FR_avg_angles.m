@@ -22,24 +22,36 @@ fr=[0 0.0005 0.001 0.002 0.003 0.005 ... the splitiing E interval array
 E_arr=(fr*Emax+(1-fr)*Emin)*100*h*c;    % splitting of E interval
 M1=N2;                  % N2-N2a collision
 M2=N2;                  % currently doesn't matter
-disp(['Length of E is ' num2str(length(E_arr))])
-disp('collision of N2 with a fictitious N2a')
+disp(['Length of E is ' num2str(length(E_arr)) '.'])
+disp('Collision of N2 with a fictitious N2a.')
 pif=zeros(length(i1), length(E_arr));
 for ind_i1=1:length(i1)
     disp(['i1=', num2str(i1(ind_i1)), ', f1=', num2str(f1)])
     for ind=1:length(E_arr)
-        disp(ind)
         pif(ind_i1, ind)=P_VT_FHO_FR_avg_angles(M1, M2, Coll_N2_N2a, ...
                                             i1(ind_i1), f1, E_arr(ind));
     end
 end
 E_cm=E_arr/h/c/100;     % switching from J to cm-1
+%% Adamovich fig 8 comparison (to 0th level), calculation with trapz
+pif_trapz=zeros(length(i1), length(E_arr));
+disp('Trapz calculations started.')
+for ind_i1=1:length(i1)
+    disp(['i1=', num2str(i1(ind_i1)), ', f1=', num2str(f1)])
+    for ind=1:length(E_arr)
+        pif_trapz(ind_i1, ind)=P_VT_FHO_FR_avg_angles(M1, M2, ...
+                        Coll_N2_N2a, i1(ind_i1), f1, E_arr(ind), 't');
+    end
+end
 %% Adamovich fig 8 comparison (to 0th level), plotting
 load data_Adamovich98_2_figs8_9.mat
 figure
 loglog(E_cm, pif(1,:), E_cm, pif(2,:), E_cm, pif(3,:), E_cm, pif(4,:), ...
                                                         'linewidth', 1.5)
 hold on
+loglog(E_cm, pif_trapz(1,:), ':', E_cm, pif_trapz(2,:), ':',...
+        E_cm, pif_trapz(3,:), ':', E_cm, pif_trapz(4,:), ':',...
+                                                        'linewidth', 1.5)
 loglog(p_VT_FHO_FR_N2N2a_10_A98_2(:,1), ...
                                      p_VT_FHO_FR_N2N2a_10_A98_2(:,2), ...
     p_VT_FHO_FR_N2N2a_20_A98_2(:,1), p_VT_FHO_FR_N2N2a_20_A98_2(:,2), ...
@@ -48,6 +60,8 @@ loglog(p_VT_FHO_FR_N2N2a_10_A98_2(:,1), ...
                                     'color', [0,0,0], 'linewidth', 1.5)
 legend("Maksim's avg int 1->0", "Maksim's avg int 2->0", ...
     "Maksim's avg int 3->0", "Maksim's avg int 5->0",...
+    "Maksim's avg trapz 1->0", "Maksim's avg trapz 2->0", ...
+    "Maksim's avg trapz 3->0", "Maksim's avg trapz 5->0",...
     'Adamovich98\_2 p10', 'Adamovich98\_2 p20', 'Adamovich98\_2 p30', ...
                             'Adamovich98\_2 p50', 'location', 'best')
 xlim([1e3 1e6])     % M-A
@@ -60,25 +74,37 @@ f1=[39 38 37 35];                       % final levels
 E_arr=(fr*Emax+(1-fr)*Emin)*100*h*c;    % splitting E interval
 M1=N2;                                  % the first molecule
 M2=N;                                   % currently doesn't matter
-disp('From 40th level')
-disp(['E array length ', num2str(length(E_arr))])
-disp('collision with a fictitious N2a')
+disp('Calculations for P_VT from 40th level.')
+disp(['E array length is ', num2str(length(E_arr)) '.'])
+disp('Collision with a fictitious N2a.')
 pif_40=zeros(length(f1), length(E_arr));
 for ind_f1=1:length(f1)
     disp(['i1=', num2str(i1), ', f1=', num2str(f1(ind_f1))])
     for ind=1:length(E_arr)
-        disp(ind)
         pif_40(ind_f1, ind)=P_VT_FHO_FR_avg_angles(M1, M2, ...
                                 Coll_N2_N2a, i1, f1(ind_f1), E_arr(ind));
     end
 end
 E_cm=E_arr/h/c/100;     % switching from J to cm-1
+%% Adamovich fig 9 comparison (from 40th level), calculation trapz
+pif_40_trapz=zeros(length(f1), length(E_arr));
+disp('Trapz calculations started.')
+for ind_f1=1:length(f1)
+    disp(['i1=', num2str(i1), ', f1=', num2str(f1(ind_f1))])
+    for ind=1:length(E_arr)
+        pif_40_trapz(ind_f1, ind)=P_VT_FHO_FR_avg_angles(M1, M2, ...
+                        Coll_N2_N2a, i1, f1(ind_f1), E_arr(ind), 't');
+    end
+end
 %% Adamovich fig 9 comparison (from 40th level), plotting
 load data_Adamovich98_2_figs8_9.mat
 figure
+loglog(E_cm, pif_40_trapz(1,:), ':', E_cm, pif_40_trapz(2,:), ':', ...
+        E_cm, pif_40_trapz(3,:), ':', E_cm, pif_40_trapz(4,:), ':', ...
+                                                        'linewidth', 1.5)
+hold on
 loglog(E_cm, pif_40(1,:), E_cm, pif_40(2,:), E_cm, pif_40(3,:), ...
                                     E_cm, pif_40(4,:), 'linewidth', 1.5)
-hold on
 loglog(p_VT_FHO_FR_N2N2a_4039_A98_2(:,1), ...
                                 p_VT_FHO_FR_N2N2a_4039_A98_2(:,2), ...
         p_VT_FHO_FR_N2N2a_4038_A98_2(:,1), ...
@@ -90,6 +116,8 @@ loglog(p_VT_FHO_FR_N2N2a_4039_A98_2(:,1), ...
                                     'color', [0,0,0], 'linewidth', 1.5)
 legend("Maksim's avg int 40->39", "Maksim's avg int 40->38", ...
         "Maksim's avg int 40->37", "Maksim's avg int 40->35",...
+        "Maksim's avg trapz 40->39", "Maksim's avg trapz 40->38", ...
+        "Maksim's avg trapz 40->37", "Maksim's avg trapz 40->35",...
         'Adamovich98\_2 p4039', 'Adamovich98\_2 p4038', ...
         'Adamovich98\_2 p4037', 'Adamovich98\_2 p4035', ...
                                                     'location', 'best')
