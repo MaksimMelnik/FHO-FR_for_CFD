@@ -14,6 +14,7 @@ error_v=1e-2;
 pVT=integral2(@(eps1, eps2) ... integration over eps via integral2
         integrant_trapz(M1, Coll, i1, f1, E, eps1, eps2), ...
                     0,1, 0,eps2max, 'RelTol',error_v,'AbsTol',error_v);
+pVT=pVT/pi^4;
 end
 
 function out=integrant_trapz(M1, Coll, i1, f1, E, eps1, eps2)
