@@ -44,4 +44,5 @@ switch method
         pvt=trapz(phi1, trapz(theta_v1, trapz(y, ...
                                         trapz(eps1, out, 1), 2), 3), 4);
 end
+pvt=pvt/pi^2;
 end
