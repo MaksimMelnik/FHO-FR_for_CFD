@@ -58,8 +58,8 @@ hold on
 loglog(p_VT_FHO_FR_N2N2_4039_G17(:,1), p_VT_FHO_FR_N2N2_4039_G17(:, 2),...
                                                         'linewidth', 1.5)
     % data obtained by Maksim via integral8
-p_VT=[1.0042529537425651E-8 0.008 1.5393];
-E_cm_int8=[4980 23600 1.0200e+05];     % E array for p_VT ^ for plotting v
+% p_VT=[1.0042529537425651E-8 0.008 1.5393];
+% E_cm_int8=[4980 23600 1.0200e+05];     % E array for p_VT ^ for plotting v
 % loglog(E_cm_int8, p_VT, 'o', 'markerfacecolor', 'r', 'markersize', 10)
     % plotting trapz results
 loglog(E_cm(1:ind), p_VT_10_tr, '--', 'linewidth', 1.5)
@@ -68,6 +68,26 @@ legend('FHO-FR Gimelshein et al. 2017, 1->0', ...
         'FHO-FR Gimelshein et al. 2017, 40->39', ...
         ..."Maksim's integral8 code", ...
         "Maksim's trapz code, 1->0", "Maksim's trapz code, 40->39", ...
+                                                    'location', 'best')
+xlim([1e3 2e5])
+ylim([1e-11 1e-1])
+title('N_2-N_2 p_{VT} FHO-FR')
+%%
+E_cm=E_arr/h/c/100;             % E in cm-1
+% load data_Gimelshein2017_f1r    % loading of data from Gimelshein plot
+figure
+loglog(p_VT_FHO_FR_N2N2_50_G17(:,1), p_VT_FHO_FR_N2N2_50_G17(:, 2), ...
+            'linewidth', 1.5)   % plotting Gimelshein plot data
+hold on
+loglog(p_VT_FHO_FR_N2N2_4037_G17(:,1), p_VT_FHO_FR_N2N2_4037_G17(:, 2),...
+                                                        'linewidth', 1.5)
+    % plotting trapz results
+loglog(E_cm(1:ind), p_VT_50_tr, '--', 'linewidth', 1.5)
+loglog(E_cm(1:ind), p_VT_4037_tr, '--', 'linewidth', 1.5)
+legend('FHO-FR Gimelshein et al. 2017, 5->0', ...
+        'FHO-FR Gimelshein et al. 2017, 40->37', ...
+        ..."Maksim's integral8 code", ...
+        "Maksim's trapz code, 5->0", "Maksim's trapz code, 40->37", ...
                                                     'location', 'best')
 xlim([1e3 2e5])
 ylim([1e-11 1e-1])
