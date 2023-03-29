@@ -1,7 +1,8 @@
-% The example of usage and plotting of P_VT_FHO_FR_avg_angles(T) vs data
-% from I. V. Adamovich et al., J. Chem. Phys. 109, 7711-7724 (1998) 
-% https://doi.org/10.1063/1.477417
-% For figs 8 and 9.
+% The example of usage and plotting of P_VT_FHO_FR_avg_angles(E) vs data
+% from figs 8 and 9 I. V. Adamovich et al., J. Chem. Phys. 109, 7711-7724
+% (1998) https://doi.org/10.1063/1.477417
+% and vs data from fig. 1 (left) S. F. Gimelshein et al. J. Thermophys.
+% Heat. Trans. 32 (4) (2017) https://doi.org/10.2514/1.T5228
 % 1. Calculation of P_VT using integralN for comparison with Adamovich FR
 %       1998 fig. 8.
 % 2. Calculation of P_VT using trapz for comparison with Adamovich FR 1998
