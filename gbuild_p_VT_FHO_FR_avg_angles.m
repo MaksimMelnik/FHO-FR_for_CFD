@@ -25,7 +25,7 @@ tic
 k = 1.380649e-23;       % Boltzmann constant, J/K
 h = 6.626070041e-34;    % Plank constant, J*sec
 c = 299792458;          % speed of light, m/sec
-load par_data.mat       % loading particles and collisions
+load particles N2       % loading particles
 Emin=1e3; Emax=1e6;     % standart min and max E value on the plot
 calc_integralN=false;   % use integralN method for calculation or 
                         %                                     only trapz?
@@ -50,7 +50,7 @@ if calc_integralN
  for ind_i1=1:length(i1)
     disp(['i1=', num2str(i1(ind_i1)), ', f1=', num2str(f1)])
     for ind=1:length(E_arr)
-        pif(ind_i1, ind)=P_VT_FHO_FR_avg_angles(M1, M2, Coll_N2_N2a, ...
+        pif(ind_i1, ind)=P_VT_FHO_FR_avg_angles(M1, M2, ...
                                             i1(ind_i1), f1, E_arr(ind));
     end
  end
@@ -63,7 +63,7 @@ for ind_i1=1:length(i1)
     disp(['i1=', num2str(i1(ind_i1)), ', f1=', num2str(f1)])
     for ind=1:length(E_arr)
         pif_trapz(ind_i1, ind)=P_VT_FHO_FR_avg_angles(M1, M2, ...
-                        Coll_N2_N2a, i1(ind_i1), f1, E_arr(ind), 't');
+                                        i1(ind_i1), f1, E_arr(ind), 't');
     end
 end
 %% 3. Adamovich fig 8 comparison (to 0th level), plotting
@@ -106,7 +106,7 @@ f1=[39 38 37 35];                       % final levels
 E_arr_40=10.^(log10(Emin):(log10(Emax)-log10(Emin))/fr_num:log10(Emax))...
                                                                 *100*h*c;
 M1=N2;                                  % the first molecule
-M2=N;                                   % currently doesn't matter
+M2=N2;
 disp('Calculations for P_VT from 40th level.')
 disp(['E array length is ', num2str(length(E_arr_40)) '.'])
 disp('Collision with a fictitious N2a.')
@@ -117,7 +117,7 @@ if calc_integralN
     disp(['i1=', num2str(i1), ', f1=', num2str(f1(ind_f1))])
     for ind=1:length(E_arr_40)
         pif_40(ind_f1, ind)=P_VT_FHO_FR_avg_angles(M1, M2, ...
-                                Coll_N2_N2a, i1, f1(ind_f1), E_arr_40(ind));
+                                        i1, f1(ind_f1), E_arr_40(ind));
     end
  end
 end
@@ -129,7 +129,7 @@ for ind_f1=1:length(f1)
     disp(['i1=', num2str(i1), ', f1=', num2str(f1(ind_f1))])
     for ind=1:length(E_arr_40)
         pif_40_trapz(ind_f1, ind)=P_VT_FHO_FR_avg_angles(M1, M2, ...
-                        Coll_N2_N2a, i1, f1(ind_f1), E_arr_40(ind), 't');
+                                    i1, f1(ind_f1), E_arr_40(ind), 't');
     end
 end
 %% 6. Adamovich fig 9 comparison (from 40th level), plotting
@@ -186,7 +186,7 @@ for ind_i1=1:length(i1)
     disp(['i1=', num2str(i1(ind_i1)), ', f1=', num2str(f1)])
     for ind=1:length(E_arr)
         pif_trapz(ind_i1, ind)=P_VT_FHO_FR_avg_angles(M1, M2, ...
-                        Coll_N2_N2a, i1(ind_i1), f1, E_arr(ind), 't');
+                                    i1(ind_i1), f1, E_arr(ind), 't');
     end
 end
 i1=40;
@@ -196,7 +196,7 @@ for ind_f1=1:length(f1)
     disp(['i1=', num2str(i1), ', f1=', num2str(f1(ind_f1)), ])
     for ind=1:length(E_arr)
         pif_trapz_40(ind_f1, ind)=P_VT_FHO_FR_avg_angles(M1, M2, ...
-                        Coll_N2_N2a, i1, f1(ind_f1), E_arr(ind), 't');
+                                    i1, f1(ind_f1), E_arr(ind), 't');
     end
 end
 %% 8. Gimelshein 2017 fig. 1 left comparison, plotting

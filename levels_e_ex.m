@@ -13,10 +13,12 @@ c = 299792458;        % m/s
     end
     switch ind
         case 1  % anharmonic oscillator
-            e_i=(M.we(elvl)*(i + 0.5) - M.wexe(elvl)*(i + 0.5).^2 + ...
-                    M.weye(elvl)*(i + 0.5).^3)*h*c;     % J
+            e_i=(M.we(elvl)*(i + 0.5) - M.wexe(elvl)*(i + 0.5).^2)*h*c;% J
         case 2  % harmonic oscillator
             e_i=(M.we(elvl)*(i + 0.5))*h*c;             % J
+        case 3  % advanced anharmonic oscillator
+            e_i=(M.we(elvl)*(i + 0.5) - M.wexe(elvl)*(i + 0.5).^2 + ...
+                    M.weye(elvl)*(i + 0.5).^3)*h*c;     % J
     end
 	out=e_i;
 end

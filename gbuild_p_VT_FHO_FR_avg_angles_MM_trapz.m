@@ -14,7 +14,8 @@
 % 06.09.2022 Maksim Melnik
 
 tic
-load par_data
+% load par_data
+load particles N2
 k = 1.380649e-23;       % Boltzmann constant, J/K
 h = 6.626070041e-34;    % Plank constant, J*sec
 c = 299792458;          % speed of light, m/sec
@@ -28,34 +29,35 @@ fr_num=50;
 E_arr=10.^(log10(Emin):(log10(Emax)-log10(Emin))/fr_num:log10(Emax))...
                                                                 *100*h*c;
 M1=N2;                                  % firs molecule
+M2=N2;
 %% 1. Callculation of P_VT using hybrid trapz integration for 1->0 
 % transition
 p_VT_10_tr=zeros(1, length(E_arr));
 i1=1;                   % initial state, P_VT for the 1->0 transition
 for ind=1:length(E_arr)
 p_VT_10_tr(ind)=...
-            P_VT_FHO_FR_MM_ij_trapz(M1, Coll_N2_N2, i1, i1-1, E_arr(ind));
+        P_VT_FHO_FR_MM_ij_trapz(M1, M2, i1, i1-1, E_arr(ind));
 end
 %% 2. Callculation of P_VT for 40->39 transition
 p_VT_4039_tr=zeros(1, length(E_arr));
 i1=40;
 for ind=1:length(E_arr)
 p_VT_4039_tr(ind)=...
-            P_VT_FHO_FR_MM_ij_trapz(M1, Coll_N2_N2, i1, i1-1, E_arr(ind));
+        P_VT_FHO_FR_MM_ij_trapz(M1, M2, i1, i1-1, E_arr(ind));
 end
 %% 3. Callculation of P_VT for 5->0 transition
 p_VT_50_tr=zeros(1, length(E_arr));
 i1=5;
 for ind=1:length(E_arr)
 p_VT_50_tr(ind)=...
-            P_VT_FHO_FR_MM_ij_trapz(M1, Coll_N2_N2, i1, i1-5, E_arr(ind));
+        P_VT_FHO_FR_MM_ij_trapz(M1, M2, i1, i1-5, E_arr(ind));
 end
 %% 4. Callculation of P_VT for 40->37 transition
 p_VT_4037_tr=zeros(1, length(E_arr));
 i1=40;
 for ind=1:length(E_arr)
 p_VT_4037_tr(ind)=...
-            P_VT_FHO_FR_MM_ij_trapz(M1, Coll_N2_N2, i1, i1-3, E_arr(ind));
+        P_VT_FHO_FR_MM_ij_trapz(M1, M2, i1, i1-3, E_arr(ind));
 end
 %% 5. Plotting P_VT vs Gimelshein 2017 for di=1
 E_cm=E_arr/h/c/100;             % E in cm-1
@@ -107,7 +109,7 @@ i1=2;
 f1=0;
 for ind=1:length(E_arr)
 p_VT_20_tr(ind)=...
-            P_VT_FHO_FR_MM_ij_trapz(M1, Coll_N2_N2, i1, f1, E_arr(ind));
+        P_VT_FHO_FR_MM_ij_trapz(M1, M2, i1, f1, E_arr(ind));
 end
 %% 8. Calculation of P_VT for 3->0 
 p_VT_30_tr=zeros(1, length(E_arr));
@@ -115,21 +117,21 @@ i1=3;
 f1=0;
 for ind=1:length(E_arr)
 p_VT_30_tr(ind)=...
-            P_VT_FHO_FR_MM_ij_trapz(M1, Coll_N2_N2, i1, f1, E_arr(ind));
+        P_VT_FHO_FR_MM_ij_trapz(M1, M2, i1, f1, E_arr(ind));
 end
 %% 9. Plotting P_VT vs Adamovich 2001
 E_cm=E_arr/h/c/100;                 % E in cm-1
 load data_Adamovich01_figs8_9     % loading of data from Adamovich plot
 figure
 loglog(p_VT_FHO_FR_N2N2_10_A01(:,1), p_VT_FHO_FR_N2N2_10_A01(:, 2), ...
-                    'linewidth', 1.5)   % plotting Adamovich plot data
+                'k', 'linewidth', 1.5)   % plotting Adamovich plot data
 hold on
 loglog(p_VT_FHO_FR_N2N2_20_A01(:,1), p_VT_FHO_FR_N2N2_20_A01(:, 2),...
-                                                        'linewidth', 1.5)
+                                                'k', 'linewidth', 1.5)
 loglog(p_VT_FHO_FR_N2N2_30_A01(:,1), p_VT_FHO_FR_N2N2_30_A01(:, 2),...
-                                                        'linewidth', 1.5)
+                                                'k', 'linewidth', 1.5)
 loglog(p_VT_FHO_FR_N2N2_50_A01(:,1), p_VT_FHO_FR_N2N2_50_A01(:, 2),...
-                                                        'linewidth', 1.5)
+                                                'k', 'linewidth', 1.5)
     % plotting trapz results
 loglog(E_cm, p_VT_10_tr, '--', 'linewidth', 1.5)
 % hold on
