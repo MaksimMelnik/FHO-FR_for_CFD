@@ -16,8 +16,16 @@ The repository contains various functions for the Forced Harmonic Oscillator Fre
 Here $M_1$ is the molecule under consideration variable, *Coll* is the collision variable, $i_1$ is the initial vibrational level of $M_1$, $f_1$ is the final vibrational level of $M_1$, $E$ is the collision energy, $\varepsilon_1$ is the fraction of vibrational energy for $M_1$, $y$ is the collision parameter, $\vartheta_1$ is the rotation angle of $M_1$, $\phi_1$ is the angle between the plane of rotation and the radius vector for $M_1$.
 
 ## to do
-- create k_VT function for MA
+- validate k_VT on fig. 12 data [1] (O$_2$-Ar)
+- validate k_VT on fig. 13 data [1] (O$_2$-Ar)
+- calculate dataset for ML approximation by A Isakov
+- validate p_VT on fig. 10 data [1] (N$_2$-Ar)
+- validate p_VT on fig. 11 data [1] (N$_2$-Ar)
+- optimize k_VT MA
+- validate k_VT on fig. 14 data [1] (N$_2$-He)
+- validate k_VT on fig. 15 data [1] (N$_2$-He)
 - create k_VT function for MM
+- validate k_VT on fig. 13 data [2] (N$_2$-N$_2$)
 - restruct repository
 - decide about VV processes
 

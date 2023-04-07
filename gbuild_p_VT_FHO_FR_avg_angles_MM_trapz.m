@@ -11,10 +11,10 @@
 % 6. Plotting P_VT vs Gimelshein 2017 for di>1
 % 7. Calculation of P_VT for 2->0 
 % 8. Calculation of P_VT for 3->0 
+% 9. Plotting P_VT vs Adamovich 2001
 % 06.09.2022 Maksim Melnik
 
 tic
-% load par_data
 load particles N2
 k = 1.380649e-23;       % Boltzmann constant, J/K
 h = 6.626070041e-34;    % Plank constant, J*sec
