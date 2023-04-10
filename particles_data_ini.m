@@ -273,7 +273,7 @@ NO.BMbeta=3.303;            % beta parameter of Born-Mayer potential, A^-1
 
 save particles.mat C O N CO C2 Ar O2 N2 NO
 
-addpath('../src/')
+rmpath('../src/')
 
 function out=ev_i_ini(M)
 % automatic vibrational energy calculation

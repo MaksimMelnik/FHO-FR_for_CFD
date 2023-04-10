@@ -19,7 +19,7 @@ error_val=1e-3;
 if M2.num_vibr_levels(1)==1
     int=integral(@(E) (E./T_cm1).^2 .* P_VT_FHO_FR_avg_angles(M1, M2, ...
             i1, f1, E*h*c*100, 't') .* exp(-E./T_cm1)/T_cm1, 0, Inf, ...
-                                'RelTol',error_val,'AbsTol',error_val);
+                            'RelTol', error_val, 'AbsTol', error_val);
 else
     error("Collisions with molecules are still not implemented.")
 end
