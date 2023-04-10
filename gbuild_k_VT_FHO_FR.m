@@ -52,18 +52,18 @@ ylim([1e-20 1e-9])
 title('Adamovich 1998 FR fig. 12, {\it k}_{VT} O_2-Ar')
 ylabel('{\it k}_{VT}, cm^3/s')
 xlabel('{\it T}, K')
-%% optimization research
+%% optimization research (currently failed)
 k = 1.380649e-23;                   % Boltzmann constant, J/K
 h = 6.626070041e-34;                % Plank constant, J*sec
 c = 299792458;                      % speed of light, m/sec
-T=10000;
-i1=10;
+T=15000;
+i1=1;
 f1=i1-1;
 T_cm1=T*k/h/c/100;                  % in cm-1
 error_val=1e-3;
 tic
 Emin=1e0; Emax=1e7;     % standart min and max E value on the plot
-fr_num=100;
+fr_num=250;
 E_arr=10.^(log10(Emin):(log10(Emax)-log10(Emin))/fr_num:log10(Emax));%...
 %                                                                 *100*h*c;
 temp=(E_arr./T_cm1).^2 .* P_VT_FHO_FR_avg_angles(O2, Ar, ...
@@ -77,3 +77,19 @@ int=integral(@(E) (E./T_cm1).^2 .* P_VT_FHO_FR_avg_angles(O2, Ar, ...
 toc
 disp('delta, %')
 (int_t-int)/int
+%%
+% какие параметры могут меняться? 
+% могут меняться i1, f1, T, M1, M2
+% Хочу придумать верхний и нижний пределы Emin, Emax для интегрирования 
+% трапециями
+% на что влияет изменение M2:
+%     вероятность растёт с массой M2
+% Потом посмотреть, на что влияет изменение i1
+%     нижний предел падает Emin с ростом i1
+%     верхний предел не понятно, вроде тоже падает Emax
+% потом изменение f1
+%     с ростом i1-f1 вероятность падает, так что оптимально для di=1
+% потом изменение T
+%     с ростом T растёт Emax
+%     
+% ну и в конце зависимость от изначальной молекулы M1
