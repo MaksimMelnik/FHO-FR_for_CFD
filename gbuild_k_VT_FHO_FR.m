@@ -15,12 +15,13 @@ kO2Ar_10=T_arr*0;
 kO2Ar_109=T_arr*0;
 kO2Ar_2019=T_arr*0;
 kO2Ar_3029=T_arr*0;
+method_k_VT='q';
 tic
 for ind=1:length(T_arr)
-    kO2Ar_10(ind)=k_VT_FHO_FR(T_arr(ind), O2, Ar, 1, 0);
-    kO2Ar_109(ind)=k_VT_FHO_FR(T_arr(ind), O2, Ar, 10, 9);
-    kO2Ar_2019(ind)=k_VT_FHO_FR(T_arr(ind), O2, Ar, 20, 19);
-    kO2Ar_3029(ind)=k_VT_FHO_FR(T_arr(ind), O2, Ar, 30, 29);
+    kO2Ar_10(ind)=k_VT_FHO_FR(T_arr(ind), O2, Ar, 1, 0, method_k_VT);
+    kO2Ar_109(ind)=k_VT_FHO_FR(T_arr(ind), O2, Ar, 10, 9, method_k_VT);
+    kO2Ar_2019(ind)=k_VT_FHO_FR(T_arr(ind), O2, Ar, 20, 19, method_k_VT);
+    kO2Ar_3029(ind)=k_VT_FHO_FR(T_arr(ind), O2, Ar, 30, 29, method_k_VT);
 end
 toc
 kO2Ar_10=kO2Ar_10*1e6;
@@ -29,6 +30,7 @@ kO2Ar_2019=kO2Ar_2019*1e6;
 kO2Ar_3029=kO2Ar_3029*1e6;
 %% 2. plotting k_VT from Adamovich 1998 FR fig 12 vs Maksim's calculation
 load data_Adamovich1998_FR_fig12
+figure
 loglog(k_VT_FHO_FR_O2Ar_10_A98_FR(:, 1), ...
                                 k_VT_FHO_FR_O2Ar_10_A98_FR(:, 2), 'k', ...
     k_VT_FHO_FR_O2Ar_109_A98_FR(:, 1), ...
@@ -60,7 +62,7 @@ T=15000;
 i1=1;
 f1=i1-1;
 T_cm1=T*k/h/c/100;                  % in cm-1
-error_val=1e-3;
+error_val=1e-7;
 tic
 Emin=1e0; Emax=1e7;     % standart min and max E value on the plot
 fr_num=250;
