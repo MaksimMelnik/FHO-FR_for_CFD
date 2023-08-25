@@ -1,4 +1,4 @@
-function pVT=P_VT_FHO_FR_MM_ij(M1, M2, i1, f1, ...
+function res_pvt=P_VT_FHO_FR_MM_ij(M1, M2, i1, f1, ...
                         E, eps1, y, theta_v1, phi1, eps2, theta_v2, phi2)
 % FHO-FR probability with a full array of arguments depending on initial
 % and final vibrational levels. Diatom-diatom collision.
@@ -27,13 +27,20 @@ xi=m_r/m0/2;
 omega=abs(e1-e2)./s/h_bar;              % 1/s
 theta_p=4*pi^2*omega.^2*m_r/(alpha^2*k); % K
 theta=h_bar*omega/k;                    % K
-u=sqrt(2*E/m_r);                        % m/s
+u=sqrt(2*E/m_r);                       % m/s
+size_u = size(u);
+
 gamma=max(0, -0.5*sin(2*theta_v1).*cos(phi1).*sqrt(eps1) ...
             -0.5*sin(2*theta_v2).*cos(phi2).*sqrt(eps2) ...
                                            + sqrt((1-eps1-eps2).*(1-y)));
+size_gamma = size(gamma);
+res_pvt = 0;
+for u_i=u
 Q=theta_p*xi.*cos(theta_v1).^2.*cos(phi1).^2 ...
-                        ./(4*theta.*sinh(pi*omega./(alpha*u*gamma)).^2);
+                        ./(4*theta.*sinh(pi*omega./(alpha*u_i.*gamma)).^2);
 ns=(factorial(max(i1,f1))./factorial(min(i1,f1))).^(1./s);
 pVT=(ns.*Q).^s./factorial(s).^2 ...
                    .*exp(-2*ns.*Q./(s+1)-(ns.*Q).^2./((s+1).^2.*(s+2)));
+res_pvt = res_pvt + pVT;
+end
 end
